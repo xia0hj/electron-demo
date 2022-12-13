@@ -12,7 +12,7 @@ process.env.DIST_ELECTRON = join(__dirname, '../..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST_ELECTRON, '../public')
 
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
@@ -103,4 +103,12 @@ ipcMain.handle('open-win', (event, arg) => {
   } else {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
+})
+
+ipcMain.on('open-import-dialog', ()=>{
+  dialog.showOpenDialog({
+    title: '导入文件'
+  }).then(file=>{
+    console.log('get file: ', file)
+  })
 })
