@@ -15,6 +15,8 @@ process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST_E
 import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
+import {exec} from 'child_process'
+import {writeFile} from 'fs'
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -109,6 +111,18 @@ ipcMain.on('open-import-dialog', ()=>{
   dialog.showOpenDialog({
     title: '导入文件'
   }).then(file=>{
+    const startTime = Date.now()
     console.log('get file: ', file)
+    const path = file.filePaths[0]
+    const p = exec(path)
+    p.on('exit', ()=>{
+      const time = (Date.now()-startTime)/1000
+      console.log('process exit, execution time = ', time)
+      writeFile('./data.json', JSON.stringify({
+        path,
+        totalTime:time
+      }), ()=>{})
+    })
   })
 })
+
