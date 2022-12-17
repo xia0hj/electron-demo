@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+			"@shared/*": ["shared/*"],
+		},
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
-  "include": ["package.json", "electron"]
+  "include": ["package.json", "electron", "shared/**/*.ts"]
 }

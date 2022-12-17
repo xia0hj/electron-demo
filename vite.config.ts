@@ -3,7 +3,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import electron from 'vite-electron-plugin'
-import { customStart, loadViteEnv } from 'vite-electron-plugin/plugin'
+import { customStart, loadViteEnv, alias } from 'vite-electron-plugin/plugin'
 import renderer from 'vite-plugin-electron-renderer'
 import pkg from './package.json'
 
@@ -14,7 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.join(__dirname, 'src'),
-      'styles': path.join(__dirname, 'src/assets/styles'),
+      '@shared': path.join(__dirname, 'shared'),
     },
   },
   plugins: [
@@ -23,6 +23,7 @@ export default defineConfig({
       include: [
         'electron',
         'preload',
+        'shared'
       ],
       transformOptions: {
         sourcemap: !!process.env.VSCODE_DEBUG,
@@ -36,6 +37,10 @@ export default defineConfig({
           : []),
         // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
         loadViteEnv(),
+        alias([{
+          find: '@shared',
+          replacement: path.join(__dirname, 'shared'),
+        }])
       ],
     }),
     // Use Node.js API in the Renderer-process

@@ -12,11 +12,11 @@ process.env.DIST_ELECTRON = join(__dirname, '../..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST_ELECTRON, '../public')
 
-import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
-import {exec} from 'child_process'
-import {writeFile} from 'fs'
+
+import { registerAllIpcEventHandlers } from './ipc-event-handler'
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -43,6 +43,7 @@ async function createWindow() {
       preload,
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false
     },
   })
 
@@ -52,6 +53,7 @@ async function createWindow() {
     win.webContents.openDevTools()
   } else {
     win.loadFile(indexHtml)
+    win.webContents.openDevTools() // 打包后也会启动控制台
   }
 
   // Test actively push message to the Electron-Renderer
@@ -107,22 +109,5 @@ ipcMain.handle('open-win', (event, arg) => {
   }
 })
 
-ipcMain.on('open-import-dialog', ()=>{
-  dialog.showOpenDialog({
-    title: '导入文件'
-  }).then(file=>{
-    const startTime = Date.now()
-    console.log('get file: ', file)
-    const path = file.filePaths[0]
-    const p = exec(path)
-    p.on('exit', ()=>{
-      const time = (Date.now()-startTime)/1000
-      console.log('process exit, execution time = ', time)
-      writeFile('./data.json', JSON.stringify({
-        path,
-        totalTime:time
-      }), ()=>{})
-    })
-  })
-})
+registerAllIpcEventHandlers();
 

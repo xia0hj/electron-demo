@@ -1,0 +1,1 @@
+export const IPC_EVENT_OPEN_IMPORT_DIALOG = '__ipc-event:open-import-dialog';

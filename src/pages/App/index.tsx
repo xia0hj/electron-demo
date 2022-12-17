@@ -1,10 +1,11 @@
 import React from "react";
 import { ipcRenderer } from "electron";
+import { IPC_EVENT_OPEN_IMPORT_DIALOG } from '@shared/constants'
 
 function App() {
 
-  function onImport(){
-    ipcRenderer.send('open-import-dialog')
+  function onImport() {
+    ipcRenderer.send(IPC_EVENT_OPEN_IMPORT_DIALOG)
   }
 
   return (
