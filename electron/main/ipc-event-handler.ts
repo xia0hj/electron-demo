@@ -8,23 +8,35 @@ export function registerAllIpcEventHandlers() {
     dialog.showOpenDialog({
       title: '导入文件'
     }).then(file=>{
+
+
       if(file.filePaths.length===0){
         return;
       }
-      const startTime = Date.now()
-      const path = '"' + file.filePaths[0] + '"'; // 避免路径中出现空格被识别为多个命令
 
-      const p = nodeChildProcess.exec(path)
-      p.on('exit', (code)=>{
-        const time = (Date.now()-startTime)/1000
-        console.log(`process exit, execution time = ${time}, code=${code}`)
-        nodeFs.writeFile('./dist/data.json', JSON.stringify({
-          path,
-          totalTime:time
-        }), ()=>{})
-      })
+      const path = file.filePaths[0]
+
+      execPath(path)
+
     }).catch(()=>{
       console.log('import dialog click cancel')
+    })
+  })
+}
+
+function execPath(path:string) {
+  const runningProcess = nodeChildProcess.exec('"'+path+'"')
+
+  console.log('is running')
+
+  runningProcess.on('exit', (code)=>{
+    const exitTime = Date.now()
+    console.log('exit time = ', exitTime)
+    nodeFs.stat(path, (err, stats)=>{
+      nodeFs.writeFile('./dist/data.json', JSON.stringify({
+        path,
+        totalTime: exitTime - stats.atimeMs
+      }), ()=>{})
     })
   })
 }
