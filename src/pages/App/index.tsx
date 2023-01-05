@@ -1,16 +1,28 @@
-import React from "react";
-import { ipcRenderer } from "electron";
-import { IPC_EVENT_OPEN_IMPORT_DIALOG } from '@shared/constants'
+import React, { useState } from "react";
+import gameDataManager, { Game } from "@/utils/GameDataManager";
 
 function App() {
 
-  function onImport() {
-    ipcRenderer.send(IPC_EVENT_OPEN_IMPORT_DIALOG)
+  const [games, setGames] = useState<Array<Game>>([]);
+
+  function addGame(){
+    window.ipcEventSender.openAddGameDialog().then(({filePaths, canceled})=>{
+      if(canceled || filePaths.length===0){
+        return;
+      }
+
+      gameDataManager.addGame(filePaths[0]);
+
+      setGames(gameDataManager.games);
+
+      console.log(gameDataManager.games)
+    })
   }
 
   return (
     <React.Fragment>
-      <button onClick={onImport}>点击打开文件</button>
+      <button onClick={addGame}>添加游戏</button>
+      <p>{games.toString()}</p>
     </React.Fragment>
   )
 }
