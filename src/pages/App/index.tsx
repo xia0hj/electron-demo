@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import gameDataManager, { Game } from "@/utils/GameDataManager";
+import {Button} from 'antd'
 
 function App() {
+
 
   const [games, setGames] = useState<Array<Game>>([]);
 
@@ -21,7 +23,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <button onClick={addGame}>添加游戏</button>
+      <Button type="primary" onClick={addGame}>添加游戏</Button>
       <div>
         {
           games.map(game => <p key={game.properties.title}>{JSON.stringify(game)}</p>)
