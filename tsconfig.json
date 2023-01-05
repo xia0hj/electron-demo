@@ -6,7 +6,6 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"paths": {
 			"@/*": ["src/*"],
-      "@shared/*": ["shared/*"],
 		},
     "allowJs": false,
     "skipLibCheck": true,
