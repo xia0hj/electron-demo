@@ -24,7 +24,7 @@ class GameDataManager {
     this.store = new Store({
       name: 'MyGame',
       fileExtension: 'json',
-      cwd: window.ipcEventSender.getAppPath()
+      cwd: nodePath.join(window.ipcEventSender.getAppPath(), 'userdata')
     });
     this.games = (this.store.get('games') as Array<Game>) ?? []
   }
