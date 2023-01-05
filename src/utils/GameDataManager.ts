@@ -1,5 +1,6 @@
-import { Store, simpleStore } from "./Store"
 import nodePath from 'path'
+import Store from 'electron-store'
+import { app } from 'electron'
 
 export interface Game {
   properties: {
@@ -13,26 +14,25 @@ export interface Game {
   }
 }
 
-export interface GameProfile {
-  version: string,
-  games: Array<Game>
-}
-
 class GameDataManager {
 
   store: Store
   games: Array<Game>
 
 
-  constructor(storeImpl: Store) {
-    this.store = storeImpl
-    this.games = []
+  constructor() {
+    this.store = new Store({
+      name: 'MyGame',
+      fileExtension: 'json',
+      cwd: window.ipcEventSender.getAppPath()
+    });
+    this.games = (this.store.get('games') as Array<Game>) ?? []
   }
 
   addGame(path: string) {
     this.games.unshift({
       properties: {
-        title: nodePath.basename(path, 'exe'),
+        title: nodePath.basename(path, '.exe'),
         path
       },
       stats: {
@@ -41,8 +41,10 @@ class GameDataManager {
         totalRunNumber: 0,
       }
     })
+    this.store.set('games', this.games)
   }
+
 }
 
-const gameDataManager = new GameDataManager(simpleStore);
+const gameDataManager = new GameDataManager();
 export default gameDataManager;

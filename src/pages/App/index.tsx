@@ -5,9 +5,9 @@ function App() {
 
   const [games, setGames] = useState<Array<Game>>([]);
 
-  function addGame(){
-    window.ipcEventSender.openAddGameDialog().then(({filePaths, canceled})=>{
-      if(canceled || filePaths.length===0){
+  function addGame() {
+    window.ipcEventSender.openAddGameDialog().then(({ filePaths, canceled }) => {
+      if (canceled || filePaths.length === 0) {
         return;
       }
 
@@ -22,7 +22,12 @@ function App() {
   return (
     <React.Fragment>
       <button onClick={addGame}>添加游戏</button>
-      <p>{games.toString()}</p>
+      <div>
+        {
+          games.map(game => <p key={game.properties.title}>{JSON.stringify(game)}</p>)
+        }
+      </div>
+
     </React.Fragment>
   )
 }
