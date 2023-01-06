@@ -1,29 +1,28 @@
-import React, { useState } from "react";
-import gameDataManager, { Game } from "@/utils/GameDataManager";
+import React from "react";
+import { addGame, selectGames } from "@/store/GameLibrarySlice";
+import { useAppDispatch, useAppSelector } from "@/store";
 import {Button} from 'antd'
 
 function App() {
 
+  const games = useAppSelector(selectGames);
+  const dispatch = useAppDispatch()
 
-  const [games, setGames] = useState<Array<Game>>([]);
-
-  function addGame() {
+  function clickAddGame() {
     window.ipcEventSender.openAddGameDialog().then(({ filePaths, canceled }) => {
       if (canceled || filePaths.length === 0) {
         return;
       }
 
-      gameDataManager.addGame(filePaths[0]);
+      dispatch(addGame(filePaths[0]))
 
-      setGames(gameDataManager.games);
-
-      console.log(gameDataManager.games)
+      console.log(games)
     })
   }
 
   return (
     <React.Fragment>
-      <Button type="primary" onClick={addGame}>添加游戏</Button>
+      <Button type="primary" onClick={clickAddGame}>添加游戏</Button>
       <div>
         {
           games.map(game => <p key={game.properties.title}>{JSON.stringify(game)}</p>)

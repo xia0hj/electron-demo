@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@types/react-redux": "^7.1.25",
     "@vitejs/plugin-react": "^3.0.0",
     "electron": "^21.3.1",
     "electron-builder": "^23.6.0",
@@ -35,7 +36,9 @@
     }
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
     "antd": "^5.1.2",
-    "electron-store": "^8.1.0"
+    "electron-store": "^8.1.0",
+    "react-redux": "^8.0.5"
   }
 }
