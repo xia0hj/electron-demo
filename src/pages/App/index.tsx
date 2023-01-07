@@ -1,7 +1,22 @@
 import React from "react";
-import { addGame, selectGames } from "@/store/GameLibrarySlice";
+import { addGame, selectGames } from "@/store/gameLibrarySlice";
 import { useAppDispatch, useAppSelector } from "@/store";
-import {Button} from 'antd'
+import {Button, Menu} from 'antd';
+import type { MenuProps } from 'antd';
+import {FileAddOutlined, SettingOutlined} from '@ant-design/icons'
+
+const topMenuConfig: MenuProps['items'] = [
+  {
+    label: '添加游戏',
+    key: 'addGame',
+    icon: <FileAddOutlined />
+  },
+  {
+    label: '设置',
+    key: 'settings',
+    icon: <SettingOutlined />
+  }
+]
 
 function App() {
 
@@ -20,9 +35,17 @@ function App() {
     })
   }
 
+  const onTopMenuBarClick: MenuProps['onClick'] = function(e){
+    switch(e.key){
+      case 'addGame':{
+        clickAddGame();
+      }
+    }
+  }
+
   return (
     <React.Fragment>
-      <Button type="primary" onClick={clickAddGame}>添加游戏</Button>
+      <Menu items={topMenuConfig} mode="horizontal" selectable={false} onClick={onTopMenuBarClick}/>
       <div>
         {
           games.map(game => <p key={game.properties.title}>{JSON.stringify(game)}</p>)
