@@ -3,7 +3,7 @@ import { RootState, AppThunk } from './index';
 import electronStore from './electronStore';
 import nodePath from 'path'
 
-interface Game {
+export interface Game {
   properties: {
     title: string,
     path:string,

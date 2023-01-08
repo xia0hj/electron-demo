@@ -1,9 +1,10 @@
 import React from "react";
-import { addGame, selectGames } from "@/store/gameLibrarySlice";
+import { addGame, Game, selectGames } from "@/store/gameLibrarySlice";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {Button, Menu} from 'antd';
 import type { MenuProps } from 'antd';
 import {FileAddOutlined, SettingOutlined} from '@ant-design/icons'
+import styles from './styles.module.scss'
 
 const topMenuConfig: MenuProps['items'] = [
   {
@@ -35,6 +36,13 @@ function App() {
     })
   }
 
+  function mapGamesToSiderMenuItems(games:Array<Game>): MenuProps['items'] {
+    return games.map(game=>({
+      label: game.properties.title,
+      key: game.properties.title
+    }))
+  }
+
   const onTopMenuBarClick: MenuProps['onClick'] = function(e){
     switch(e.key){
       case 'addGame':{
@@ -44,15 +52,12 @@ function App() {
   }
 
   return (
-    <React.Fragment>
+    <div className={styles.container}>
       <Menu items={topMenuConfig} mode="horizontal" selectable={false} onClick={onTopMenuBarClick}/>
-      <div>
-        {
-          games.map(game => <p key={game.properties.title}>{JSON.stringify(game)}</p>)
-        }
+      <div className={styles.content}>
+        <Menu items={mapGamesToSiderMenuItems(games)} mode="vertical" />
       </div>
-
-    </React.Fragment>
+    </div>
   )
 }
 

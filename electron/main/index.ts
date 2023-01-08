@@ -48,7 +48,7 @@ async function createWindow() {
       webSecurity: false
     },
     width: 1300,
-    height: 800
+    height: 800,
   })
 
   if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
