@@ -1,5 +1,5 @@
 import React, { MouseEventHandler, useState } from "react";
-import { addGame, Game, selectGames } from "@/store/gameLibrarySlice";
+import { addGame, Game, selectGames } from "@/store/GameLibrarySlice";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { Button, Menu, Tooltip, Modal, Typography } from 'antd';
 import type { MenuProps } from 'antd';

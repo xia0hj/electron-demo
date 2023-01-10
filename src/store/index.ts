@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import gameLibrarySlice from './gameLibrarySlice';
+import gameLibrarySlice from './GameLibrarySlice';
 
 
 export const store = configureStore({

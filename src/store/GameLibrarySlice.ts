@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from './index';
-import electronStore from './electronStore';
+import electronStore from './ElectronStore';
 import nodePath from 'path'
 
 export interface Game {
