@@ -24,13 +24,24 @@ function GameLibrary() {
     })
   }
 
-
-  function mapGamesToSiderMenuItems(games: Array<Game>): MenuProps['items'] {
-    return games.map(game => ({
-      label: game.properties.title,
-      key: game.properties.title
-    }))
+  function buildSiderBarList(games: Array<Game>): MenuProps['items'] {
+    return [
+      {
+        key: 'addGame',
+        label: '添加游戏',
+        icon: <FileAddOutlined />
+      },
+      {
+        type: 'divider',
+      },
+      ...games.map(game => ({
+        label: game.properties.title,
+        key: game.properties.title
+      }))
+    ]
   }
+
+
   const onSiderBarClick: MenuProps['onClick'] = function (e) {
     setCurGameDetail(games.find(game => game.properties.title === e.key))
   }
@@ -53,9 +64,8 @@ function GameLibrary() {
 
   return (
     <div className={styles.game_library}>
-      <Menu items={mapGamesToSiderMenuItems(games)} mode="vertical" onClick={onSiderBarClick} />
+      <Menu items={buildSiderBarList(games)} mode="vertical" onClick={onSiderBarClick} />
       <div className={styles.detail}>
-        <a />
         {renderGameDetail()}
       </div>
     </div>

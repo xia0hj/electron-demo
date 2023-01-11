@@ -1,5 +1,6 @@
 import { Menu, MenuProps } from "antd";
 import {useNavigate} from 'react-router-dom'
+import {DatabaseOutlined,SettingOutlined} from '@ant-design/icons'
 
 function TopMenuBar(){
 
@@ -8,11 +9,13 @@ function TopMenuBar(){
   const topMenuConfig: MenuProps['items'] = [
     {
       key: 'gameLibrary',
-      label: '游戏库'
+      label: '游戏库',
+      icon: <DatabaseOutlined />
     },
     {
       key: 'settings',
-      label: '设置'
+      label: '设置',
+      icon:<SettingOutlined />
     }
   ];
 

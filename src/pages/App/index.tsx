@@ -20,7 +20,7 @@ function App() {
 
 
   return (
-    <div className={styles.container}>
+    <div className={styles.app}>
       <TopMenuBar />
       <Routes>
         <Route path="/" element={ <GameLibrary /> } />
