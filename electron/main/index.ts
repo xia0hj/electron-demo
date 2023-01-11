@@ -17,6 +17,7 @@ import { release } from 'os'
 import { join } from 'path'
 
 import { registerAllIpcEventHandlers } from './IpcEventManager'
+import ElectronStore from 'electron-store';
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -37,6 +38,8 @@ const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   Menu.setApplicationMenu(null);
+
+  ElectronStore.initRenderer();
 
   win = new BrowserWindow({
     title: 'Main window',

@@ -36,7 +36,3 @@ export const ipcEventSender = {
   openDevtools: () => ipcRenderer.send(IPC_OPEN_DEVTOOLS),
   getAppPath: () => (ipcRenderer.sendSync(IPC_GET_APP_PATH) as string)
 };
-
-async function openAddGameDialogHandler() {
-
-}
