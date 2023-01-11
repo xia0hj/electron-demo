@@ -24,7 +24,7 @@ function GameLibrary() {
     })
   }
 
-  function buildSiderBarList(games: Array<Game>): MenuProps['items'] {
+  function buildSiderBarList(games: {[key:string]:Game}): MenuProps['items'] {
     return [
       {
         key: 'addGame',
@@ -34,16 +34,20 @@ function GameLibrary() {
       {
         type: 'divider',
       },
-      ...games.map(game => ({
-        label: game.properties.title,
-        key: game.properties.title
+      ...Object.keys(games).map(key=>({
+        key,
+        label: games[key].properties.title
       }))
     ]
   }
 
 
-  const onSiderBarClick: MenuProps['onClick'] = function (e) {
-    setCurGameDetail(games.find(game => game.properties.title === e.key))
+  const onSiderBarClick: MenuProps['onClick'] = function (info) {
+    if(info.key==='addGame'){
+      clickAddGame()
+    }else{
+      setCurGameDetail(games[info.key])
+    }
   }
 
 
@@ -64,7 +68,7 @@ function GameLibrary() {
 
   return (
     <div className={styles.game_library}>
-      <Menu items={buildSiderBarList(games)} mode="vertical" onClick={onSiderBarClick} />
+      <Menu className={styles.sider_bar} items={buildSiderBarList(games)} mode="vertical" onClick={onSiderBarClick} />
       <div className={styles.detail}>
         {renderGameDetail()}
       </div>

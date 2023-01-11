@@ -22,6 +22,8 @@ function TopMenuBar(){
   const onTopMenuBarClick: MenuProps['onClick'] = function(info) {
     if(info.key==='gameLibrary'){
       navigate('/game-library')
+    }else if(info.key==='settings'){
+      navigate('/settings')
     }
   }
 

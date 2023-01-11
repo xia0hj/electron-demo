@@ -17,11 +17,20 @@ export interface Game {
 }
 
 export interface GameLibraryState {
-  games: Array<Game>
+  games: {[key:string]:Game}
+}
+
+function parseGamesJsonToMap(){
+  const localGames = electronStore.get('games', {}) as {[key:string]:Game};
+  const gamesMap = new Map<string, Game>()
+  Object.keys(localGames).forEach(key=>{
+    gamesMap.set(key, localGames[key])
+  })
+  return gamesMap;
 }
 
 const initialState: GameLibraryState = {
-  games: (electronStore.get('games') as Array<Game>) ?? []
+  games: electronStore.get('games', {}) as {[key:string]:Game}
 };
 
 
@@ -33,7 +42,7 @@ export const gameLibrarySlice = createSlice({
     addGame: (state, action: PayloadAction<string>) =>{
       const gamePath = action.payload;
 
-      state.games.push({
+      state.games[gamePath] = {
         properties: {
           title: nodePath.basename(gamePath, '.exe'),
           path: gamePath,
@@ -44,8 +53,9 @@ export const gameLibrarySlice = createSlice({
           lastRunTime: 0,
           totalRunNumber: 0,
         }
-      });
-      electronStore.set('games', state.games)
+      }
+
+      electronStore.set(`games.${gamePath}`, state.games)
     },
   },
 });
