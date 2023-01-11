@@ -40,6 +40,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "antd": "^5.1.2",
     "electron-store": "^8.1.0",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.6.2"
   }
 }
