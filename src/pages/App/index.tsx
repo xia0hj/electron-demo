@@ -1,13 +1,13 @@
 import React, { MouseEventHandler, useState } from "react";
-import { addGame, Game, selectGames } from "@/store/GameLibrarySlice";
+import { addGame, Game, selectGames } from "@/store/game-library-slice";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { Button, Menu, Tooltip, Modal, Typography } from 'antd';
 import type { MenuProps } from 'antd';
 import { FileAddOutlined, SettingOutlined, EditOutlined } from '@ant-design/icons'
-import styles from './styles.module.scss'
-import TopMenuBar from "@/components/TopMenuBar";
+import styles from './index.module.scss'
+import TopMenuBar from "@/components/top-menu-bar";
 import { Route, Routes } from "react-router-dom";
-import GameLibrary from "../GameLibrary";
+import GameLibrary from "../game-library";
 
 function App() {
 

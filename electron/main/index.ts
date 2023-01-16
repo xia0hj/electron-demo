@@ -16,7 +16,7 @@ import { app, BrowserWindow, shell, ipcMain, Menu } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
-import { registerAllIpcEventHandlers } from './IpcEventManager'
+import { registerAllIpcEventHandlers } from './ipc-event-manager'
 import ElectronStore from 'electron-store';
 
 // Disable GPU Acceleration for Windows 7
