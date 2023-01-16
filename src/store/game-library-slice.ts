@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from './index';
-import electronStore from './ElectronStore';
+import { userDataGet, userDataSet } from './persistence';
 import nodePath from 'path'
 
 export interface Game {
@@ -21,7 +21,7 @@ export interface GameLibraryState {
 }
 
 function parseGamesJsonToMap(){
-  const localGames = electronStore.get('games', {}) as {[key:string]:Game};
+  const localGames = userDataGet('games', {}) as {[key:string]:Game};
   const gamesMap = new Map<string, Game>()
   Object.keys(localGames).forEach(key=>{
     gamesMap.set(key, localGames[key])
@@ -30,7 +30,7 @@ function parseGamesJsonToMap(){
 }
 
 const initialState: GameLibraryState = {
-  games: electronStore.get('games', {}) as {[key:string]:Game}
+  games: userDataGet('games', {}) as {[key:string]:Game}
 };
 
 
@@ -55,7 +55,7 @@ export const gameLibrarySlice = createSlice({
         }
       }
 
-      electronStore.set(`games.${gamePath}`, state.games)
+      userDataSet(`games.${gamePath}`, state.games)
     },
   },
 });
