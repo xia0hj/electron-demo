@@ -24,7 +24,4 @@ release
 *.sln
 *.sw?
 
-#lockfile
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
+
