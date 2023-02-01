@@ -1,3 +1,8 @@
+import { nativeApi } from "../native/electron-api"
+
+(window as any).nativeApi = nativeApi;
+
+
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {
     if (condition.includes(document.readyState)) {

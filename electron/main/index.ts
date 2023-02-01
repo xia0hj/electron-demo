@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
+import { setupElectronApi } from '../native/electron-api'
 
 // The built directory structure
 //
@@ -60,7 +61,10 @@ async function createWindow() {
     win.webContents.openDevTools()
   } else {
     win.loadFile(indexHtml)
+    win.webContents.openDevTools()
   }
+
+  setupElectronApi(win);
 
   // Test actively push message to the Electron-Renderer
   win.webContents.on('did-finish-load', () => {
