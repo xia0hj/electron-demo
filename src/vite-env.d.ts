@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import {NativeApi} from '../electron/native/electron-api'
+import {NativeApi} from '../electron/native'
 
 declare global {
   interface Window {

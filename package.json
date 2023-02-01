@@ -19,8 +19,10 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.29.2",
+    "@types/ffi-napi": "^4.0.7",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/ref-napi": "^3.0.6",
     "@vitejs/plugin-react": "^3.0.1",
     "electron": "20.0.0",
     "electron-builder": "^23.6.0",
@@ -34,5 +36,9 @@
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
+  },
+  "dependencies": {
+    "ffi-napi": "^4.0.3",
+    "ref-napi": "^3.0.3"
   }
 }

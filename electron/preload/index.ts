@@ -1,4 +1,4 @@
-import { nativeApi } from "../native/electron-api"
+import { nativeApi } from "../native"
 
 (window as any).nativeApi = nativeApi;
 

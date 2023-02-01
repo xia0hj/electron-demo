@@ -1,4 +1,5 @@
 import { BrowserWindow, dialog, ipcMain, ipcRenderer } from "electron"
+import { testWin32 } from "./win32";
 
 
 const IPC_ADD = 'electron-ipc/add';
@@ -24,7 +25,8 @@ const registerIpcEventHandlers = () => {
 
 export const nativeApi = {
   add: ():Promise<Electron.OpenDialogReturnValue> => ipcRenderer.invoke(IPC_ADD),
-  openDevtools: () => ipcRenderer.send(IPC_DEVTOOLS)
+  openDevtools: () => ipcRenderer.send(IPC_DEVTOOLS),
+  testWin32: () => testWin32()
 }
 
 export type NativeApi = typeof nativeApi;

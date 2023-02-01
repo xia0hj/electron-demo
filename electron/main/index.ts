@@ -1,7 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
-import { setupElectronApi } from '../native/electron-api'
+import { setupElectronApi } from '../native'
 
 // The built directory structure
 //
