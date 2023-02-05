@@ -1,9 +1,8 @@
-// var ref = require('ref');
-// var ffi = require('ffi');
 import ffi from 'ffi-napi';
-import ref from 'ref-napi'
+import ref from 'ref-napi';
+import { User32 } from 'win32-api/promise';
 
-export const testWin32 = () => {
+export const testFFI = () => {
   var voidPtr = ref.refType(ref.types.void);
   var stringPtr = ref.refType(ref.types.CString);
 
@@ -25,4 +24,6 @@ export const testWin32 = () => {
   // @ts-ignore
   user32.EnumWindows(windowProc, 0);
 }
+
+
 

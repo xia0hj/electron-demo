@@ -38,7 +38,9 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "dependencies": {
+    "@types/mocha": "^10.0.1",
     "ffi-napi": "^4.0.3",
-    "ref-napi": "^3.0.3"
+    "ref-napi": "^3.0.3",
+    "win32-api": "^20.2.0"
   }
 }
