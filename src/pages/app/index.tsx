@@ -23,9 +23,7 @@ const App = ():JSX.Element => {
 
   const onDevtools = () => window.nativeApi.openDevtools();
 
-  const onFFI = () => window.nativeApi.testFFI();
-
-  // const onWin32 = () => window.nativeApi.testWin32();
+  const onRun = () => window.nativeApi.run(path);
 
 
   // JSX
@@ -34,7 +32,7 @@ const App = ():JSX.Element => {
       <div>
         <button onClick={onAdd}>add</button>
         <button onClick={onDevtools}>devtools</button>
-        <button onClick={onFFI}>FFI</button>
+        <button onClick={onRun}>run</button>
       </div>
       <div className={styles['debug-output']}>
         <p>path: {path}</p>

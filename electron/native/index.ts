@@ -1,5 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, ipcRenderer } from "electron"
-import { testFFI } from "./win32";
+import { ProcessObserver } from "./process-observer";
+
 
 
 const IPC_ADD = 'electron-ipc/add';
@@ -26,7 +27,9 @@ const registerIpcEventHandlers = () => {
 export const nativeApi = {
   add: ():Promise<Electron.OpenDialogReturnValue> => ipcRenderer.invoke(IPC_ADD),
   openDevtools: () => ipcRenderer.send(IPC_DEVTOOLS),
-  testFFI: () => testFFI()
+  run: (path:string) => {
+    new ProcessObserver(path);
+  },
 }
 
 export type NativeApi = typeof nativeApi;
