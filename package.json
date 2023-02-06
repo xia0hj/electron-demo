@@ -29,7 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.57.1",
-    "typescript": "^4.9.4",
+    "typescript": "^4.9.5",
     "vite": "^4.0.4",
     "vite-electron-plugin": "^0.7.4",
     "vite-plugin-electron-renderer": "^0.11.4"
@@ -41,6 +41,6 @@
     "@types/mocha": "^10.0.1",
     "ffi-napi": "^4.0.3",
     "ref-napi": "^3.0.3",
-    "win32-api": "^20.2.0"
+    "win32-api": "^20.4.0"
   }
 }
