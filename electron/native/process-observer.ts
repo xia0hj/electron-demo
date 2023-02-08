@@ -3,8 +3,10 @@ import { stat } from 'node:fs/promises'
 import { User32 } from 'win32-api/promise';
 import { DTypes } from 'win32-api'
 import ffi from 'ffi-napi'
+import { setTimeout, clearTimeout } from 'node:timers'
 
 import { testEventHook } from './testWin32';
+import activeWindow from 'active-win';
 
 export class ProcessObserver {
 
@@ -12,12 +14,15 @@ export class ProcessObserver {
 
   startTime: number;
 
+  timer: NodeJS.Timeout;
+
 
   constructor(path: string) {
     this.startTime = Date.now();
     this.execProcess = execFile(path);
     this.execProcess.on('exit', () => {
       const exitTime = Date.now();
+      clearTimeout(this.timer);
       console.log('进程结束: ', {
         exitTime,
         duration: `${(exitTime - this.startTime) / 1000}秒`
@@ -30,11 +35,19 @@ export class ProcessObserver {
       startTime: this.startTime
     })
 
-    if (this.execProcess.pid !== undefined) {
-      testEventHook(this.execProcess.pid);
+    const checkActiveWindow = async () => {
+      const curWindow = await activeWindow();
+      if(curWindow?.owner.processId === this.execProcess.pid){
+        console.log('正在运行');
+      }else{
+        console.log('后台运行')
+      }
+      this.timer = setTimeout(checkActiveWindow, 1000);
     }
-
+    this.timer = setTimeout(checkActiveWindow, 1000);
   }
+
+
 
 
 }

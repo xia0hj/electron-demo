@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@types/mocha": "^10.0.1",
+    "active-win": "^8.0.3",
     "ffi-napi": "^4.0.3",
     "ref-napi": "^3.0.3",
     "win32-api": "^20.4.0"
