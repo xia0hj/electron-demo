@@ -1,11 +1,8 @@
 import { execFile, ChildProcess, spawn } from 'node:child_process';
 import { stat } from 'node:fs/promises'
-import { User32 } from 'win32-api/promise';
-import { DTypes } from 'win32-api'
 import ffi from 'ffi-napi'
 import { setTimeout, clearTimeout } from 'node:timers'
 
-import { testEventHook } from './testWin32';
 import activeWindow from 'active-win';
 
 export class ProcessObserver {
@@ -35,19 +32,16 @@ export class ProcessObserver {
       startTime: this.startTime
     })
 
-    const checkActiveWindow = async () => {
+    const monitorHandler = async () => {
       const curWindow = await activeWindow();
       if(curWindow?.owner.processId === this.execProcess.pid){
         console.log('正在运行');
       }else{
         console.log('后台运行')
       }
-      this.timer = setTimeout(checkActiveWindow, 1000);
+      this.timer = setTimeout(monitorHandler, 1000);
     }
-    this.timer = setTimeout(checkActiveWindow, 1000);
+    this.timer = setTimeout(monitorHandler, 1000);
   }
-
-
-
 
 }

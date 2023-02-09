@@ -2,11 +2,11 @@ import { BrowserWindow, dialog, ipcMain, ipcRenderer } from "electron"
 import { ProcessObserver } from "./process-observer";
 
 
-
 const IPC_ADD = 'electron-ipc/add';
 const IPC_DEVTOOLS = 'electron-ipc/devtools'
 
 let mainWindow: BrowserWindow;
+
 
 export const setupElectronApi = (browserWindow: BrowserWindow) => {
   mainWindow = browserWindow;

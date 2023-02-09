@@ -1,4 +1,5 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { loadSqlite } from '../native/database'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { setupElectronApi } from '../native'
@@ -41,6 +42,8 @@ const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
 
+loadSqlite();
+
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
@@ -52,6 +55,7 @@ async function createWindow() {
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false
     },
   })
 
@@ -63,6 +67,8 @@ async function createWindow() {
     win.loadFile(indexHtml)
     win.webContents.openDevTools()
   }
+
+
 
   setupElectronApi(win);
 
