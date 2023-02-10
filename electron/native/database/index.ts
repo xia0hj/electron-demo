@@ -1,32 +1,13 @@
-import { Database, verbose } from "sqlite3";
-
-const initDb = (db: Database) => {
-  db.serialize(() => {
-    db.run('create table if not exists test_table(name varchar(10))', () => {
-      db.all('select * from sqlite_master where type="table";', (err, res) => {
-        console.dir(res);
-      })
-    })
-  })
-}
+import bsq3 from 'better-sqlite3';
 
 export const loadSqlite = () => {
-  const sqlite3 = verbose();
-  const db = new sqlite3.Database("sq3.db");
-  initDb(db);
+  const db = new bsq3('foobar.db');
+  db.pragma('journal_mode = WAL');
+  db.exec('create table if not exists test_table(name varchar(10))');
 }
 
 
 
-
-// db.serialize(() => {
-//   db.run("create table test(name varchar(20))", () => {
-//     db.all('select * from sqlite_master where type="table";', (err, res) => {
-//       console.dir(res);
-//     })
-//   })
-
-// });
 
 
 
