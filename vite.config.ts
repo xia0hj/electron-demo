@@ -14,7 +14,9 @@ const resolveConfig = {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
-  rmSync('dist-electron', { recursive: true, force: true })
+
+  rmSync('dist-electron', { recursive: true, force: true });
+
   return {
     resolve: resolveConfig,
     plugins: [
@@ -25,7 +27,13 @@ export default defineConfig(({ command }) => {
           vite: {
             resolve: resolveConfig,
             build: {
-              outDir: 'dist-electron'
+              outDir: 'dist-electron',
+              rollupOptions: {
+                external: [
+                  'active-win',
+                  'better-sqlite3'
+                ]
+              }
             }
           }
         },
@@ -41,7 +49,8 @@ export default defineConfig(({ command }) => {
             build: {
               rollupOptions: {
                 external: [
-                  'active-win'
+                  'active-win',
+                  'better-sqlite3'
                 ]
               }
             }

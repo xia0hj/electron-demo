@@ -27,3 +27,6 @@ dist-ssr
 dist-electron
 dist-web
 release
+
+# User data
+user-data/*.sqlite

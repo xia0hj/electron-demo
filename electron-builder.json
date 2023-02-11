@@ -17,7 +17,7 @@
   "win": {
     "target": [
       {
-        "target": "nsis",
+        "target": "7z",
         "arch": [
           "x64"
         ]
@@ -25,10 +25,10 @@
     ],
     "artifactName": "${productName}_${version}.${ext}"
   },
-  "nsis": {
-    "oneClick": false,
-    "perMachine": false,
-    "allowToChangeInstallationDirectory": true,
-    "deleteAppDataOnUninstall": false
-  }
+  "extraFiles":[
+    {
+      "from": "./user-data",
+      "to": "./user-data"
+    }
+  ]
 }
