@@ -8,7 +8,8 @@ import { join } from 'node:path'
 const resolveConfig = {
   alias: {
     '@main': join(__dirname, 'src', 'main'),
-    '@renderer': join(__dirname, 'src', 'renderer')
+    '@renderer': join(__dirname, 'src', 'renderer'),
+    '@shared': join(__dirname, 'src', 'shared')
   }
 }
 

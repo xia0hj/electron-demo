@@ -5,23 +5,21 @@ const App = (): JSX.Element => {
 
   // hooks
   const [path, setPath] = useState('');
+  const [output, setOutput] = useState({});
 
 
   // event
   const onAdd = () => {
 
-    window.nativeApi.add().then(({ canceled, filePaths }) => {
-      if (canceled || filePaths.length === 0) {
-        return;
-      }
-      setPath(filePaths[0]);
-    });
+    window.NativeApi.addExe().then(exe=>{
+      setOutput(exe);
+    })
   }
 
 
-  const onDevtools = () => window.nativeApi.openDevtools();
+  const onDevtools = () => window.NativeApi.openDevtools();
 
-  const onRun = () => window.nativeApi.run(path);
+  const onRun = () => window.NativeApi.run(path);
 
   // JSX
   return (
@@ -32,7 +30,7 @@ const App = (): JSX.Element => {
         <button onClick={onRun}>run</button>
       </div>
       <div className={styles['debug-output']}>
-        <p>path: {path}</p>
+        <p>debug-output: {JSON.stringify(output)}</p>
       </div>
     </div>
   )
