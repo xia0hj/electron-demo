@@ -2,6 +2,7 @@ import { BrowserWindow, ipcMain, ipcRenderer, dialog } from "electron";
 import { DatabaseApi } from "@main/database";
 import nodePath from 'node:path';
 import { App } from "@shared/types";
+import { NULL_ID } from "@shared/constants";
 
 const IPC_ADD = 'electron-ipc/add';
 const IPC_DEVTOOLS = 'electron-ipc/devtools'
@@ -17,6 +18,7 @@ export const registerIpcEventHandlers = (mainWindow:BrowserWindow)=>{
     }
     const path = filePaths[0];
     const app = {
+      id: NULL_ID,
       name: nodePath.basename(path),
       exePath: path,
       notes: '',

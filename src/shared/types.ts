@@ -1,5 +1,8 @@
 export interface App {
-  id?:number,
+  /**
+   * rowid in sqlite, id=-1 -> not submit to sqlite
+   */
+  id:number,
   name:string,
   exePath:string,
   notes?:string,

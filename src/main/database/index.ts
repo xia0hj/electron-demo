@@ -18,8 +18,8 @@ export const DatabaseApi = {
       app.lastAccessTime
     ]);
     return {
-      id: Number(lastInsertRowid),
       ...app,
+      id: Number(lastInsertRowid),
     }
   },
   logRunPeriod(period:RunPeriod){
@@ -31,7 +31,11 @@ export const DatabaseApi = {
       period.isActive ? 1 : 0
     ]);
   },
-
+  getAllApps():App[]{
+    const all = db.prepare<App[]>('SELECT * FROM app').all();
+    console.log('all apps: ', all);
+    return all;
+  }
 }
 
 
