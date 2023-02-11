@@ -1,3 +1,4 @@
+import LeftToolBar from '@renderer/components/left-tool-bar';
 import { Exe } from '@shared/types';
 import { useState } from 'react'
 import styles from './index.module.scss';
@@ -31,13 +32,10 @@ const App = (): JSX.Element => {
   // JSX
   return (
     <div className={styles.container}>
+      <LeftToolBar/>
       <div>
-        <button onClick={onAdd}>add</button>
-        <button onClick={onDevtools}>devtools</button>
-        <button onClick={onRun}>run</button>
-      </div>
-      <div className={styles['debug-output']}>
-        <p>debug-output: {JSON.stringify(output)}</p>
+        <h1>H1</h1>
+        <h2>H2</h2>
       </div>
     </div>
   )

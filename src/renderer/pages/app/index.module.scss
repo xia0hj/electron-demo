@@ -1,11 +1,6 @@
 .container {
   display: flex;
-  flex-direction: column;
+  height: 100%
 }
 
-.debug-output {
-  margin-top: 20px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
+

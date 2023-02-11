@@ -10,7 +10,9 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "active-win": "^8.0.3",
+    "antd": "^5.2.0",
     "better-sqlite3": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -31,6 +33,5 @@
     "env": {
       "VITE_DEV_SERVER_URL": "http://127.0.0.1:8964/"
     }
-  },
-  "postinstall": "electron-builder install-app-deps"
+  }
 }
