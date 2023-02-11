@@ -1,6 +1,7 @@
 import LeftToolBar from '@renderer/components/left-tool-bar';
 import { Exe } from '@shared/types';
 import { useState } from 'react'
+import {Route, Routes} from 'react-router-dom'
 import styles from './index.module.scss';
 
 const App = (): JSX.Element => {
@@ -33,10 +34,11 @@ const App = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <LeftToolBar/>
-      <div>
-        <h1>H1</h1>
-        <h2>H2</h2>
-      </div>
+      <Routes>
+        <Route path="/" element={<div>Home</div>} ></Route>
+        <Route path="/library" element={<div>Library</div>} ></Route>
+        <Route path="/settings" element={<div>Settings</div>} ></Route>
+      </Routes>
     </div>
   )
 }
