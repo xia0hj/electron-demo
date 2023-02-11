@@ -22,8 +22,7 @@ export const registerIpcEventHandlers = (mainWindow:BrowserWindow)=>{
       description: '',
       totalDuration: 0,
     };
-    DatabaseApi.addExe(exe);
-    return exe;
+    return DatabaseApi.addExe(exe);
   })
 
   ipcMain.on(IPC_DEVTOOLS, () => mainWindow.webContents.openDevTools());

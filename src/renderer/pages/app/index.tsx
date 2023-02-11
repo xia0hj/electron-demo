@@ -1,3 +1,4 @@
+import { Exe } from '@shared/types';
 import { useState } from 'react'
 import styles from './index.module.scss';
 
@@ -6,6 +7,7 @@ const App = (): JSX.Element => {
   // hooks
   const [path, setPath] = useState('');
   const [output, setOutput] = useState({});
+  const [curExe, setCurExe] = useState<Exe|null>(null);
 
 
   // event
@@ -13,13 +15,18 @@ const App = (): JSX.Element => {
 
     window.NativeApi.addExe().then(exe=>{
       setOutput(exe);
+      setCurExe(exe)
     })
   }
 
 
   const onDevtools = () => window.NativeApi.openDevtools();
 
-  const onRun = () => window.NativeApi.run(path);
+  const onRun = () => {
+    if(curExe!==null){
+      window.NativeApi.run(curExe);
+    }
+  }
 
   // JSX
   return (
