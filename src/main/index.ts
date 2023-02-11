@@ -1,11 +1,10 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import nodePath from 'node:path';
+import { registerIpcEventHandlers } from './native/electron-ipc';
 
 
 const DIST_ELECTRON = __dirname;
 const DIST_WEB = nodePath.join(DIST_ELECTRON, '../dist-web')
-
-
 let mainWindow: BrowserWindow | null = null
 
 
@@ -18,11 +17,14 @@ const createWindow = async () => {
     }
   });
 
+
   if(process.env.VITE_DEV_SERVER_URL){
     mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL)
   }else{
     mainWindow.loadFile(nodePath.join(DIST_WEB, 'index.html'))
   }
+
+  registerIpcEventHandlers(mainWindow);
 
   mainWindow.webContents.openDevTools();
 }
