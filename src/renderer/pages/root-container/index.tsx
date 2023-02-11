@@ -1,15 +1,16 @@
 import LeftToolBar from '@renderer/components/left-tool-bar';
-import { Exe } from '@shared/types';
+import { App } from '@shared/types';
 import { useState } from 'react'
 import {Route, Routes} from 'react-router-dom'
+import Library from '@renderer/pages/library';
 import styles from './index.module.scss';
 
-const App = (): JSX.Element => {
+const RootContainer = (): JSX.Element => {
 
   // hooks
   const [path, setPath] = useState('');
   const [output, setOutput] = useState({});
-  const [curExe, setCurExe] = useState<Exe|null>(null);
+  const [curExe, setCurExe] = useState<App|null>(null);
 
 
   // event
@@ -32,14 +33,14 @@ const App = (): JSX.Element => {
 
   // JSX
   return (
-    <div className={styles.container}>
+    <div className={styles['root-container']}>
       <LeftToolBar/>
       <Routes>
         <Route path="/" element={<div>Home</div>} ></Route>
-        <Route path="/library" element={<div>Library</div>} ></Route>
+        <Route path="/library" element={<Library />} ></Route>
         <Route path="/settings" element={<div>Settings</div>} ></Route>
       </Routes>
     </div>
   )
 }
-export default App;
+export default RootContainer;

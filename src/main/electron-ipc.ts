@@ -1,7 +1,7 @@
 import { BrowserWindow, ipcMain, ipcRenderer, dialog } from "electron";
 import { DatabaseApi } from "@main/database";
 import nodePath from 'node:path';
-import { Exe } from "@shared/types";
+import { App } from "@shared/types";
 
 const IPC_ADD = 'electron-ipc/add';
 const IPC_DEVTOOLS = 'electron-ipc/devtools'
@@ -16,19 +16,19 @@ export const registerIpcEventHandlers = (mainWindow:BrowserWindow)=>{
       return;
     }
     const path = filePaths[0];
-    const exe = {
+    const app = {
       name: nodePath.basename(path),
-      path,
-      description: '',
+      exePath: path,
+      notes: '',
       totalDuration: 0,
     };
-    return DatabaseApi.addExe(exe);
+    return DatabaseApi.importApp(app);
   })
 
   ipcMain.on(IPC_DEVTOOLS, () => mainWindow.webContents.openDevTools());
 }
 
 export const ipcEventSender = {
-  addExe: ():Promise<Exe> => ipcRenderer.invoke(IPC_ADD),
+  addExe: ():Promise<App> => ipcRenderer.invoke(IPC_ADD),
   openDevtools: () => ipcRenderer.send(IPC_DEVTOOLS),
 }

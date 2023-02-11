@@ -3,12 +3,12 @@ import { stat } from 'node:fs/promises'
 import { setTimeout, clearTimeout } from 'node:timers'
 
 import activeWindow from 'active-win';
-import { Exe } from '@shared/types';
+import { App } from '@shared/types';
 import { DatabaseApi } from '@main/database';
 
 export class ProcessObserver {
 
-  exe: Exe;
+  app: App;
 
   execProcess: ChildProcess;
 
@@ -17,9 +17,9 @@ export class ProcessObserver {
   timer: NodeJS.Timeout;
 
 
-  constructor(exe: Exe) {
+  constructor(app: App) {
     this.startTime = Date.now();
-    this.execProcess = execFile(exe.path);
+    this.execProcess = execFile(app.exePath);
     this.execProcess.on('exit', () => {
       const exitTime = Date.now();
       clearTimeout(this.timer);
@@ -28,7 +28,7 @@ export class ProcessObserver {
         duration: `${(exitTime - this.startTime) / 1000}秒`
       })
     })
-    this.exe = exe;
+    this.app = app;
     console.log('进程启动: ', {
       pid: this.execProcess.pid,
       spawnfile: this.execProcess.spawnfile,
@@ -45,7 +45,7 @@ export class ProcessObserver {
       if(curActiveFlag!==isActive){
         const curTimestamp = Date.now()
         DatabaseApi.logRunPeriod({
-          exeId: this.exe.id as number,
+          appId: this.app.id as number,
           startTime: periodStartTime,
           endTime: curTimestamp,
           isActive

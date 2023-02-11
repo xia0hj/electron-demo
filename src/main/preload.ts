@@ -3,12 +3,12 @@ import path from 'node:path'
 import activeWindow from "active-win";
 import { ipcEventSender } from "@main/electron-ipc";
 import { ProcessObserver } from "@main/process-observer";
-import { Exe } from "@shared/types";
+import { App } from "@shared/types";
 
 const NativeApi = {
   ...ipcEventSender,
-  run(exe:Exe){
-    new ProcessObserver(exe);
+  run(app:App){
+    new ProcessObserver(app);
   }
 }
 
