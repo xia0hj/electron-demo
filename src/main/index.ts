@@ -1,6 +1,6 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import nodePath from 'node:path';
-import { registerIpcEventHandlers } from '@main/native/electron-ipc';
+import { registerIpcEventHandlers } from '@main/electron-ipc';
 import nodeFs from 'node:fs';
 
 
