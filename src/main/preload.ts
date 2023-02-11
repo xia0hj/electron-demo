@@ -1,10 +1,12 @@
 import { contextBridge } from "electron";
 import path from 'node:path'
+import activeWindow from "active-win";
 
 const nativeApi = {
-  test(){
-    console.log(path.join(__dirname, 'eeee'))
-  }
+  async test(){
+    const win = await activeWindow();
+    console.log(win);
+  },
 }
 
 contextBridge.exposeInMainWorld('nativeApi', nativeApi);

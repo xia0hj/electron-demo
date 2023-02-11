@@ -25,6 +25,15 @@ export default defineConfig(({ command }) => {
             // instead of restarting the entire Electron App.
             options.reload()
           },
+          vite:{
+            build:{
+              rollupOptions:{
+                external:[
+                  'active-win'
+                ]
+              }
+            }
+          }
         }
       ])
     ],
