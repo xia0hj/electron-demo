@@ -1,6 +1,6 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import nodePath from 'node:path';
-import { registerIpcEventHandlers } from './native/electron-ipc';
+import { registerIpcEventHandlers } from '@main/native/electron-ipc';
 
 
 const DIST_ELECTRON = __dirname;

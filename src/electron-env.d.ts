@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import { NativeApi } from './main/preload'
+import { NativeApi } from '@main/preload'
 
 
 declare global {

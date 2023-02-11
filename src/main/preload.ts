@@ -1,8 +1,8 @@
 import { contextBridge, dialog } from "electron";
 import path from 'node:path'
 import activeWindow from "active-win";
-import { ipcEventSender } from "./native/electron-ipc";
-import { ProcessObserver } from "./native/process-observer";
+import { ipcEventSender } from "@main/native/electron-ipc";
+import { ProcessObserver } from "@main/native/process-observer";
 
 const nativeApi = {
   ...ipcEventSender,
