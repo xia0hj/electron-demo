@@ -12,6 +12,8 @@ let mainWindow: BrowserWindow | null = null
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     title: 'main window',
+    width: 1100,
+    height: 700,
     webPreferences:{
       preload: nodePath.join(__dirname, 'preload.js'),
       nodeIntegration: true,

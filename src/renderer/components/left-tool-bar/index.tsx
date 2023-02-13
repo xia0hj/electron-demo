@@ -25,7 +25,8 @@ const LeftToolBar = (): JSX.Element => {
   return (
     <Menu
       items={items}
-      mode="vertical"
+      mode="inline"
+      inlineCollapsed={true}
       onClick={onMenuItemClick}
     />
   )

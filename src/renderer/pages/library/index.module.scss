@@ -1,3 +1,13 @@
 .library-layout {
   display: flex;
 }
+
+.layout-left {
+  display: flex;
+  flex-direction: column;
+
+  .left-top {
+    display: flex;
+    justify-content: space-between;
+  }
+}

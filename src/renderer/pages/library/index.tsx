@@ -5,36 +5,31 @@ import { useState } from 'react';
 
 import styles from './index.module.scss';
 
-const initialAppList:App[] = window.NativeApi.getAllApps();
+const initialAppList: App[] = window.NativeApi.getAllApps();
 
-const Library = ():JSX.Element => {
+const Library = (): JSX.Element => {
 
   const [appList, setAppList] = useState<App[]>(initialAppList);
 
 
 
-  const convertAppListToMenuItems = ():MenuProps['items'] => {
-    const items = appList.map(app=>{
+  const convertAppListToMenuItems = (): MenuProps['items'] => {
+    return appList.map(app => {
       return {
         key: `appList-${app.id}`,
         label: app.name,
       }
     });
-    items.unshift({
-      key: 'add',
-      label: 'add'
-    })
-    return items;
   }
 
-  const menuClickHandler:MenuProps['onClick'] = (menuInfo)=>{
-    if(menuInfo.key==='add'){
-      window.NativeApi.addExe().then(newApp=>{
-        if(newApp!==null){
+  const menuClickHandler: MenuProps['onClick'] = (menuInfo) => {
+    if (menuInfo.key === 'add') {
+      window.NativeApi.addExe().then(newApp => {
+        if (newApp !== null) {
           setAppList([newApp, ...appList]);
         }
       });
-    }else if(menuInfo.key.startsWith('appList-')) {
+    } else if (menuInfo.key.startsWith('appList-')) {
 
     }
 
@@ -44,11 +39,19 @@ const Library = ():JSX.Element => {
 
   return (
     <div className={styles['library-layout']}>
-      <Menu
-        mode="vertical"
-        items={convertAppListToMenuItems()}
-        onClick={menuClickHandler}
-      />
+      <div className={styles['layout-left']}>
+        <div className={styles['left-top']}>
+          <Button>add</Button>
+          <Button>sort</Button>
+        </div>
+
+        <Menu
+          mode="vertical"
+          items={convertAppListToMenuItems()}
+          onClick={menuClickHandler}
+        />
+      </div>
+
     </div>
   )
 }
