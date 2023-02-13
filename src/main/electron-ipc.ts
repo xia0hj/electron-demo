@@ -14,7 +14,7 @@ export const registerIpcEventHandlers = (mainWindow:BrowserWindow)=>{
       filters: [{ name: 'exe', extensions: ['exe'] }],
     });
     if(canceled || filePaths.length===0){
-      return;
+      return null;
     }
     const path = filePaths[0];
     const app = {
@@ -31,6 +31,6 @@ export const registerIpcEventHandlers = (mainWindow:BrowserWindow)=>{
 }
 
 export const ipcEventSender = {
-  addExe: ():Promise<App> => ipcRenderer.invoke(IPC_ADD),
+  addExe: ():Promise<App|null> => ipcRenderer.invoke(IPC_ADD),
   openDevtools: () => ipcRenderer.send(IPC_DEVTOOLS),
 }

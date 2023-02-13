@@ -19,7 +19,9 @@ export class ProcessObserver {
 
   constructor(app: App) {
     this.startTime = Date.now();
-    this.execProcess = execFile(app.exePath);
+    this.execProcess = spawn(app.exePath, {
+      detached: true
+    });
     this.execProcess.on('exit', () => {
       const exitTime = Date.now();
       clearTimeout(this.timer);

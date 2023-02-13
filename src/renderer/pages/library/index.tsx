@@ -30,7 +30,9 @@ const Library = ():JSX.Element => {
   const menuClickHandler:MenuProps['onClick'] = (menuInfo)=>{
     if(menuInfo.key==='add'){
       window.NativeApi.addExe().then(newApp=>{
-        setAppList([newApp, ...appList]);
+        if(newApp!==null){
+          setAppList([newApp, ...appList]);
+        }
       });
     }else if(menuInfo.key.startsWith('appList-')) {
 
